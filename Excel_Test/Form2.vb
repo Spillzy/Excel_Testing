@@ -15,13 +15,18 @@ Public Class Form2
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
 
+        'Need to somehow make objWorkbook be the Workbook that is currently open and being used.
+        objWorkbook = objExcel.ActiveWorkbook 'Doesn't work
+
         If objWorkbook Is Nothing Then
-            MessageBox.Show("No object for Wokrbook", "Test", MessageBoxButtons.OK)
+            MessageBox.Show("No object for Workbook", "Test", MessageBoxButtons.OK)
+        Else
+            Dim rangeTest As Excel.Range
+            rangeTest = objWorksheet.Range("B1")
+            rangeTest.Value = TextBox1.Text
         End If
 
-        'Dim rangeTest As Excel.Range
-        'rangeTest = objWorksheet.Range("B1")
-        'rangeTest.Value = TextBox1.Text
+
     End Sub
 
     'Dim objWorkbook As Excel.Workbook = CType(objExcel.ActiveWorkbook, Excel.Workbook)

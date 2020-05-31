@@ -5,7 +5,7 @@ Imports Microsoft.Office.Interop
 
 Public Class Form1
 
-    Dim objExcel As Object
+    Dim objExcel As New Excel.Application
     Dim objWorkbook As Excel.Workbook
     Dim objWorksheet As Excel.Worksheet
 
@@ -16,9 +16,8 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        objExcel = CreateObject("Excel.Application")
         objWorkbook = objExcel.Workbooks.Add
-        objWorksheet = objExcel.Worksheets.add()
+        objWorksheet = objExcel.Worksheets.Add
         objExcel.Visible = True
 
         'MessageBox.Show("Opening Excel", "Test", MessageBoxButtons.OK)

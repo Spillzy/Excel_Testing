@@ -1,5 +1,6 @@
 ﻿'Option Strict On
 Option Explicit On
+Imports System.ComponentModel
 Imports Microsoft.Office.Interop
 
 Public Class Form2
@@ -36,6 +37,12 @@ Public Class Form2
 
         objExcel.Visible = True
 
+    End Sub
+
+
+
+    Private Sub Form2_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Form1.Show()
     End Sub
 
     'Dim objWorkbook As Excel.Workbook = CType(objExcel.ActiveWorkbook, Excel.Workbook)

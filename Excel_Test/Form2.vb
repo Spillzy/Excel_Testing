@@ -1,4 +1,4 @@
-﻿Option Strict On
+﻿'Option Strict On
 Option Explicit On
 Imports Microsoft.Office.Interop
 
@@ -16,16 +16,25 @@ Public Class Form2
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
 
         'Need to somehow make objWorkbook be the Workbook that is currently open and being used.
-        objWorkbook = objExcel.ActiveWorkbook 'Doesn't work
+        objExcel = CType(System.Runtime.InteropServices.Marshal.GetActiveObject("Excel.Application"), Excel.Application) 'Grabs the first opened instance of Excel, this is definitly not the best method, but only one I found that works so far.
+        objWorkbook = CType(objExcel.ActiveWorkbook, Excel.Workbook)
+        objWorksheet = CType(objExcel.ActiveSheet, Excel.Worksheet)
+        'objWorkbook = objExcel.ActiveWorkbook
+        'objWorksheet = objExcel.ActiveSheet
 
-        If objWorkbook Is Nothing Then
-            MessageBox.Show("No object for Workbook", "Test", MessageBoxButtons.OK)
+        If objExcel Is Nothing Then
+            MessageBox.Show("No object for Excel", "No Object Found", MessageBoxButtons.OK)
+        ElseIf objWorkbook Is Nothing Then
+            MessageBox.Show("No object for Workbook", "No Object Found", MessageBoxButtons.OK)
+        ElseIf objWorksheet Is Nothing Then
+            MessageBox.Show("No object for Worksheet", "No Object Found", MessageBoxButtons.OK)
         Else
             Dim rangeTest As Excel.Range
             rangeTest = objWorksheet.Range("B1")
             rangeTest.Value = TextBox1.Text
         End If
 
+        objExcel.Visible = True
 
     End Sub
 
